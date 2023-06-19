@@ -1,3 +1,9 @@
+<?php
+  require_once __DIR__ . '../controller/UsersController.php';
+  $service = new UsersController();
+  
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,7 +11,7 @@
     <link rel="stylesheet" href="../content/css/signupstyle.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Sign Up - OutdoorsMedia</title>
+    <title>Sign Up</title>
 </head>
 <body>
 

@@ -103,7 +103,7 @@ class UsersController {
 
         $errors = array();
 
-        if (isset($_POST['form-submitted'])) {
+        if ($_SERVER['REQUEST-METHOD'] === 'POST') {
 
             $name = isset($_POST['name']) ? filter_input(INPUT_POST, 'name') : NULL;
             $password = isset($_POST['password']) ? filter_input(INPUT_POST, 'password') : NULL;
