@@ -63,10 +63,10 @@ class UsersService {
         }
     
 
-    public function createNewUser($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path) {
+    public function createNewUser($name, $email, $password, $title, $description, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path) {
         try {
 
-            $res = $this->userRepository->insert($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
+            $res = $this->userRepository->insert($name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
             return $res;
         } catch (Exception $e) {
             throw $e;

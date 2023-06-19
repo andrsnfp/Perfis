@@ -32,15 +32,14 @@ class UserRepository {
         return new User($user[`id`], $user[`name`], $user[`email`], $user[`password`], $user[`title`], $user[`description`], $user[`link_twitter`], $user[`link_facebook`],$user['link_linkedin'], $user[`link_github`], $user[`image_path`]);
     }
 
-    public function insert($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_gitHub, $image_path) {
+    public function insert($name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_gitHub, $image_path) {
 
         try {
-            $stmt = $this->db->prepare("INSERT INTO `users` (`id`, `name`, `email`, `password`, `title`, `description`, `link_twitter`, `link_facebook`, `link_linkedin`, `link_github`, `image_path`) "
-                    . "VALUES(:id, :name, :email, :password, :title, :description, :link_twtr, :link_fbook, :link_lnkdn, :link_github, :image_path)");
-            $stmt->bindparam(":id", `NULL`);
+            $stmt = $this->db->prepare("INSERT INTO `users` (`name`, `email`, `password`, `title`, `description`, `link_twitter`, `link_facebook`, `link_linkedin`, `link_github`, `image_path`) "
+                    . "VALUES(:name, :email, :password, :title, :description, :link_twtr, :link_fbook, :link_lnkdn, :link_github, :image_path)");
             $stmt->bindparam(":name", $name);
-            $stmt->bindparam(":password", $password);
             $stmt->bindparam(":email", $email);
+            $stmt->bindparam(":password", $password);
             $stmt->bindparam(":title", $title);
             $stmt->bindparam(":description", $description);
             $stmt->bindparam(":link_twtr", $link_twtr);

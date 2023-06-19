@@ -117,8 +117,8 @@ class UsersController {
             $image_path = isset($_POST['image_path']) ? filter_input(INPUT_POST, 'image_path') : NULL;
            
             try {
-                $this->usersService->createNewUser($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
-                $this->redirect('login.php');
+                $this->usersService->createNewUser($name, $email, $password, $title, $description, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
+                //$this->redirect('login.php');
                 return;
             } catch (Exception $e) {
                 $this->showError("Application error", $e->getMessage());

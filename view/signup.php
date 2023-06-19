@@ -49,8 +49,8 @@
     <input type="text" placeholder="Your GitHub Link" name="link_github">
     
     <h4>Security</h4>
-    <label for="psw" class="label"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
+    <label for="password" class="label"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="password" required>
 
     <label for="psw-repeat" class="label"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" required>

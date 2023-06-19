@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    
+<h2 style="text-align: center;">yourprofile.com</h2>
 <div class="card">
     <div class="search">
         <form class="search-form">
