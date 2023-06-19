@@ -1,50 +1,70 @@
 <?php
-  require_once __DIR__ . '../controller/UsersController.php';
-  $service = new UsersController();
-  
+  require_once '../controller/UsersController.php';
+  $userController = new UsersController();
+  $userController->saveUser();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../content/css/signupstyle.css">
+    <link rel="stylesheet" href="../content/css/signup.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sign Up</title>
 </head>
 <body>
 
-    <h2>Create a Profile</h2>
+    <h2 style="text-align: center;">yourprofile.com</h2>
 
-<form action="/action_page.php" style="border:3px solid #ccc">
-    <h3 style="margin-bottom: 0px;">Sign Up</h3>
-  <div class="container">
-    <p>Fill in this form to create a profile. It's Free!!!</p>
-    <hr>
+<div class="card">
+  <form method="post">
+    <h3>CREATE AN ACCOUNT</h3>
+
+    <div class="container">
     <h4>Personal Information</h4>
-    <label for="name"><b>Name</b></label>
+    <label for="name" class="label"><b>Name</b></label>
     <input type="text" placeholder="Enter your Name" name="name" required>
+
+    <label for="title" class="label">Title</label>
+    <input type="text" placeholder="Enter your title" name="title" required>
+
+    <label for="description" class="label">Description</label>
+    <input type="text" placeholder="Enter your Description" name="description" required>
    
     <h4>Contacts</h4>
-    <label for="email"><b>Email</b></label>
+    <label for="email" class="label"><b>Email</b></label>
     <input type="email" placeholder="Enter Email" name="email" required>
 
+    <label for="link_twtr" class="label"><b>Twitter</b></label>
+    <input type="text" placeholder="Your Twitter Link" name="link_twtr">
+
+    <label for="link_fbook" class="label"><b>Facebook</b></label>
+    <input type="text" placeholder="Your Facebook Link" name="link_fbook">
+
+    <label for="link_lnkdn" class="label"><b>Linkedin</b></label>
+    <input type="text" placeholder="Your Linkedin Link" name="link_lnkdn">
+
+    <label for="link_github" class="label"><b>GitHub</b></label>
+    <input type="text" placeholder="Your GitHub Link" name="link_github">
+    
     <h4>Security</h4>
-    <label for="psw"><b>Password</b></label>
+    <label for="psw" class="label"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
 
-    <label for="psw-repeat"><b>Repeat Password</b></label>
+    <label for="psw-repeat" class="label"><b>Repeat Password</b></label>
     <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
     
-    <button type="submit" class="signupbtn">Sign Up</button>
+    <button name="form-submitted" type="submit" class="signupbtn" href="login.php" >Sign Up</button>
 
     <hr><p id="gotoreg">Already have an Account? <a href="login.php">Log in</a></p>
     <div class="clearfix">
       <a href="../index.php"><button type="button" class="cancelbtn">Cancel</button></a>
     </div>
   </div>
-</form>
+    </div>
 
+  </form>
+</div>
 </body>
 </html>

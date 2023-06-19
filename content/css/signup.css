@@ -1,0 +1,43 @@
+.card {
+  padding-top: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(3, 6, 9, 0.2);
+  max-width: 400px;
+  margin: auto;
+  font-family: arial;
+}
+
+h3,h4{
+  text-align: center;
+  text-shadow: #010a2c;
+}
+
+.label{
+  padding-left: 1rem;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #0b0338;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 17px;
+}
+
+.cancelbtn{
+  background-color: red;
+}
+
+input[type=text], input[type=password],input[type=email] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #8b8b8b;
+  box-sizing: border-box;
+  background: #f1f1f1;
+}

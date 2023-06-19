@@ -1,6 +1,6 @@
 <?php
 
-require_once 'model/UsersService.php';
+require_once '../model/UsersService.php';
 
 class UsersController {
     private $usersService = NULL;
@@ -103,7 +103,7 @@ class UsersController {
 
         $errors = array();
 
-        if ($_SERVER['REQUEST-METHOD'] === 'POST') {
+        if (isset($_POST['form-submitted'])) {
 
             $name = isset($_POST['name']) ? filter_input(INPUT_POST, 'name') : NULL;
             $password = isset($_POST['password']) ? filter_input(INPUT_POST, 'password') : NULL;
@@ -118,14 +118,12 @@ class UsersController {
            
             try {
                 $this->usersService->createNewUser($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
-                $this->redirect('index.php');
+                $this->redirect('login.php');
                 return;
             } catch (Exception $e) {
                 $this->showError("Application error", $e->getMessage());
             }
         }
-
-        include 'view/user-form.php';
     }
 
     public function showError($title, $message) {
