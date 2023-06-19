@@ -9,6 +9,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../content/css/signup.css">
+    <script src="../content/js/signup.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sign Up</title>
@@ -18,7 +19,7 @@
     <h2 style="text-align: center;">yourprofile.com</h2>
 
 <div class="card">
-  <form method="post">
+  <form method="post" id="form1">
     <h3>CREATE AN ACCOUNT</h3>
 
     <div class="container">
@@ -50,10 +51,12 @@
     
     <h4>Security</h4>
     <label for="password" class="label"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
+    <input type="password" id="password" placeholder="Enter Password" name="password" required>
 
     <label for="psw-repeat" class="label"><b>Repeat Password</b></label>
-    <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+    <input type="password" id="repeat-password" placeholder="Repeat Password" name="psw-repeat" required>
+
+    <div id="error-message"></div>
     
     <button name="form-submitted" type="submit" class="signupbtn" href="login.php" >Sign Up</button>
 
@@ -66,5 +69,6 @@
 
   </form>
 </div>
+
 </body>
 </html>

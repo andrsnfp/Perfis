@@ -88,8 +88,11 @@ class UsersController {
         include 'view/users.php';
     }
 
+    public function authenticateUser() {
+        
+    }
+
     public function saveUser() {
-        $id='';
         $name = '';
         $email = '';
         $title = '';

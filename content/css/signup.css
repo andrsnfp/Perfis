@@ -41,3 +41,8 @@ input[type=text], input[type=password],input[type=email] {
   box-sizing: border-box;
   background: #f1f1f1;
 }
+
+#error-message {
+  color: red;
+  margin-top: 5px;
+}

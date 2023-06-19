@@ -1,3 +1,9 @@
+<?php
+  require_once '../controller/UsersController.php';
+  $userController = new UsersController();
+  $userController->authenticateUser($email,$password);
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,7 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Log in</title>
-    <link rel="stylesheet" href="../content/css/login.css">
+    <link rel="stylesheet" href="../content/css/login1.css">
   </head>
 <body>
 
@@ -16,17 +22,18 @@
     <h3>ACCESS YOUR ACCOUNT</h3>
 
   <div class="container">
-    <label for="email"><b>Email</b></label>
+
+    <label for="email" class="label"><b>Email</b></label>
     <input type="email" placeholder="Enter your Email" name="email" required>
 
-    <label for="psw"><b>Password</b></label>
+    <label for="psw" class="label"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="psw" required>
         
     <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me
     </label>
     
-    <button type="submit">Login</button>
+    <button type="submit" name="form-submitted">Login</button>
     <span class="psw">Forgot <a href="#">password?</a></span>
     <hr><p id="gotoreg">Don't have an Account? <a href="signup.php">Create one</a></p>
   </div>

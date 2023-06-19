@@ -32,6 +32,19 @@ class UserRepository {
         return new User($user[`id`], $user[`name`], $user[`email`], $user[`password`], $user[`title`], $user[`description`], $user[`link_twitter`], $user[`link_facebook`],$user['link_linkedin'], $user[`link_github`], $user[`image_path`]);
     }
 
+    public function authentication($email, $password) {
+        try {
+            $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `email` = :email AND `password` = :password");
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $password);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            return false;
+        }
+    }
+
     public function insert($name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_gitHub, $image_path) {
 
         try {

@@ -7,6 +7,12 @@
     font-family: arial;
 }
 
+h3,h4{
+    text-align: center;
+    text-shadow: #010a2c;
+}
+
+
 button {
     border: none;
     outline: 0;
@@ -24,7 +30,17 @@ button {
     background-color: red;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type="password"]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 2px solid #8b8b8b;
+    box-sizing: border-box;
+    background: #f1f1f1;
+}
+
+input[type="email"]{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
