@@ -61,7 +61,14 @@ class UsersService {
                 throw $e;
             }
         }
-    
+    public function getUserByEmail($email){
+        try {
+            $res = $this->userRepository->selectByEmail($email);
+            return $res;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
 
     public function createNewUser($name, $email, $password, $title, $description, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path) {
         try {

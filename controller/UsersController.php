@@ -4,6 +4,7 @@ require_once '../model/UsersService.php';
 
 class UsersController {
     private $usersService = NULL;
+    private $controller = NULL;
 
     public function __construct() {
         $this->usersService = new UsersService();
@@ -11,6 +12,21 @@ class UsersController {
 
     public function redirect($location) {
         header('Location: ' . $location);
+        exit();
+    }
+
+    function flash($name = '', $message = '', $class = 'form-message form-message-red'){
+        if (!empty($name)) {
+            if (!empty($message) && empty($_SESSION[$name])) {
+                $_SESSION[$name] = $message;
+                $_SESSION[$name . '_class'] = $class;
+            } else if (empty($message) && !empty($_SESSION[$name])) {
+                $class = !empty($_SESSION[$name . '_class']) ? $_SESSION[$name . '_class'] : $class;
+                echo '<div class="' . $class . '" >' . $_SESSION[$name] . '</div>';
+                unset($_SESSION[$name]);
+                unset($_SESSION[$name . '_class']);
+            }
+        }
     }
 
     public function requestsHandler($id) {
@@ -46,6 +62,42 @@ class UsersController {
     public function prevUser($id) {
         $users = $this->usersService->getNextUser($id);
         include 'view/users.php';
+    }
+
+    public function login()
+    {
+        //Sanitize POST data
+        $_POST = filter_input_array(INPUT_POST);
+
+        //Init data
+        $data = [
+            'email' => trim($_POST['email']),
+            'password' => trim($_POST['password'])
+        ];
+
+        if (empty($data['email']) || empty($data['password'])) {
+            
+            $this->flash("login", "Por favor preencha todos os campos");
+            header("location: ../login.php");
+            exit();
+        }
+
+        //Check for user/email
+        if ($this->usersService->getUserByEmail($data['email'])) {
+            //User Found
+            $loggedInUser = $this->controller->login($data['email'], $data['usersPwd']);
+            if ($loggedInUser) {
+                //Create session
+                $this->createUserSession($loggedInUser);
+                $this->redirect('users.php');
+            } else {
+                $this->flash("login", "Palavra-passe incorrecta");
+                $this->redirect("login.php");
+            }
+        } else {
+            $this->flash("login", "Nenhum utilizador encontrado");
+            $this->redirect("../login.php");
+        }
     }
     
     public function editUser($id) {
@@ -89,7 +141,6 @@ class UsersController {
     }
 
     public function saveUser() {
-        $id='';
         $name = '';
         $email = '';
         $title = '';
@@ -104,7 +155,6 @@ class UsersController {
         $errors = array();
 
         if (isset($_POST['form-submitted'])) {
-
             $name = isset($_POST['name']) ? filter_input(INPUT_POST, 'name') : NULL;
             $password = isset($_POST['password']) ? filter_input(INPUT_POST, 'password') : NULL;
             $email = isset($_POST['email']) ? filter_input(INPUT_POST, 'email') : NULL;
@@ -117,13 +167,21 @@ class UsersController {
             $image_path = isset($_POST['image_path']) ? filter_input(INPUT_POST, 'image_path') : NULL;
            
             try {
-                $this->usersService->createNewUser($name, $email, $password, $title, $description, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
-                //$this->redirect('login.php');
+                $this->usersService->createNewUser($name, $email, md5($password), $title, $description, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path);
+                $this->redirect('login.php');
                 return;
             } catch (Exception $e) {
                 $this->showError("Application error", $e->getMessage());
             }
         }
+    }
+
+    public function createUserSession($user)
+    {
+        $_SESSION['id'] = $user->id;
+        $_SESSION['name'] = $user->name;
+        $_SESSION['email'] = $user->email;
+        $this->redirect("../view/users.php");
     }
 
     public function showError($title, $message) {

@@ -28,7 +28,13 @@ class UserRepository {
         $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `id` = :id");
         $stmt->execute([`id` => $id]);
         $user = $stmt->fetch();
+        return new User($user[`id`], $user[`name`], $user[`email`], $user[`password`], $user[`title`], $user[`description`], $user[`link_twitter`], $user[`link_facebook`],$user['link_linkedin'], $user[`link_github`], $user[`image_path`]);
+    }
 
+    public function selectByEmail($email) {
+        $stmt = $this->db->prepare("SELECT * FROM `users` WHERE `email` = :email");
+        $stmt->execute([`email` => $email]);
+        $user = $stmt->fetch();
         return new User($user[`id`], $user[`name`], $user[`email`], $user[`password`], $user[`title`], $user[`description`], $user[`link_twitter`], $user[`link_facebook`],$user['link_linkedin'], $user[`link_github`], $user[`image_path`]);
     }
 
@@ -55,6 +61,21 @@ class UserRepository {
         }
     }
 
+    public function authenticate($email,$password){
+        $query = "SELECT * FROM `users` WHERE `email` = :email";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindparam(':email', $email);
+        $stmt->execute();
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        } else {
+            return null;
+        }
+    }
+
     public function editUser($id, $name, $email, $title, $description, $password, $link_twtr, $link_lnkdn, $link_fbook, $link_github, $image_path){
         try{
             $stmt = $this->db->prepare("UPDATE `users` SET `name` = $name, `email`=$email, `password` = $password, `title`= $title, `description`= $description, `link_twitter`=$link_twtr, `link_facebook`= $link_fbook, `link_linkedin` = $link_lnkdn, `link_github`=$link_github, `image_path`=$image_path WHERE `users`.`id`= $id");
@@ -67,7 +88,6 @@ class UserRepository {
     public function delete($id) {
 
         try {
-
             $stmt = $this->db->prepare("DELETE FROM `users` WHERE `users`.`id` =:id");
             $stmt->bindparam(":id", $id);
             $stmt->execute();
